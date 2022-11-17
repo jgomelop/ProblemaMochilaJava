@@ -8,7 +8,7 @@ package problemadelamochila;
  *
  * @author jpgl2
  */
-public class Item {
+public class Item implements Comparable{
     public double weight;
     public double value;
 
@@ -19,6 +19,24 @@ public class Item {
 
     public Item() {
     }
-    
+
+    public static boolean cmp(Item a, Item b) {
+        double r1 = (double) a.value / a.weight;
+        double r2 = (double) b.value / b.weight;
+        return r1 > r2;
+    }
+    @Override
+    public int compareTo(Object o) {
+        Item b = (Item) o;
+        double r1 = (double) this.value / this.weight;
+        double r2 = (double) b.value / b.weight;
+        
+        if (r1 > r2){
+            return 0;
+        } else{
+            return 1;
+        }
+        
+    }
     
 }
