@@ -8,39 +8,12 @@ import java.lang.*;
  */
 public class ProblemaDeLaMochila {
 
-    public static void cargaMochila(int capacidad, int m, double peso[], double beneficio[], int solucion[]) {
-        int n, i, j, aux;
-        double tabla[][];
-        n = capacidad + 1;
-        tabla = new double[m][n];
-        for (i = 1; i < n; i++) {
-            tabla[0][i] = 0;
-        }
-        for (i = 1; i < n; i++) {
-            tabla[i][0] = 0;
-        }
-        for (i = 1; i < m; i++) {
-            for (j = 1; j < n; j++) {
-                if (peso[i] > j) {
-                    tabla[i][j] = tabla[i - 1][j];
-                    System.out.printf("i: %d, j: %d, tabla: %.2f\n", i, j, tabla[i][j]);
-                } else {
-                    aux = j - (int) Math.ceil(peso[i]);
-                    tabla[i][j] = Math.max(tabla[i - 1][j], tabla[i - 1][aux] + beneficio[i]);
-                    System.out.printf("i: %d, j: %d, tabla: %.2f\n", i, j, tabla[i][j]);
-
-                }
-            }
-        }
-        j = n - 1;
-        for (i = m - 1; i > 0; i--) {
-            if (tabla[i][j] != tabla[i - 1][j]) {
-                solucion[i] = 1;
-                aux = j - (int) Math.ceil(peso[i]);
-                j = j - aux;
-            }
-        }
-
+    // Comparison function to sort Item according to
+    // val/weight ratio
+    public static boolean cmp(Item a, Item b) {
+        double r1 = (double) a.value / a.weight;
+        double r2 = (double) b.value / b.weight;
+        return r1 > r2;
     }
 
     /**
@@ -84,16 +57,6 @@ public class ProblemaDeLaMochila {
         int solucion[] = new int[m];
         for (int i = 0; i < m; i++) {
             solucion[i] = 0;
-        }
-
-        cargaMochila(capacidad, m, peso, beneficio, solucion);
-
-        // Imprimo solución
-        for (int i = 1; i < m; i++) {
-            if (solucion[i] == 1) {
-                System.out.println(i);
-            }
-
         }
 
     }
