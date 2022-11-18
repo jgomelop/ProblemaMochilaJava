@@ -1,6 +1,8 @@
 package problemadelamochila;
 
 import java.lang.*;
+import java.util.Collections;
+import java.util.*;
 
 /**
  *
@@ -10,12 +12,6 @@ public class ProblemaDeLaMochila {
 
     // Comparison function to sort Item according to
     // val/weight ratio
-    public static boolean cmp(Item a, Item b) {
-        double r1 = (double) a.value / a.weight;
-        double r2 = (double) b.value / b.weight;
-        return r1 > r2;
-    }
-
     /**
      * @param args the command line arguments
      */
@@ -53,11 +49,14 @@ public class ProblemaDeLaMochila {
         beneficio[10] = 2;
         beneficio[11] = 4;
         beneficio[12] = 7;
-
-        int solucion[] = new int[m];
-        for (int i = 0; i < m; i++) {
-            solucion[i] = 0;
-        }
+        
+        List<Item> arr = new ArrayList<>();
+        arr.add(new Item(0.5,5));
+        arr.add(new Item(2,13));
+        arr.add(new Item(0.3,4));
+        
+        Collections.sort(arr, new Item.ColorComparator());
+        
 
     }
 
