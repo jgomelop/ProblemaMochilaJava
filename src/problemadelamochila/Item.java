@@ -1,15 +1,16 @@
 package problemadelamochila;
 
 import java.lang.*;
-import java.util.*;
 
 public class Item implements Comparable<Item> {
 
+    public String name;
     public double weight;
     public double value;
     public double valuePerWeight;
 
-    public Item(double weight, double value) {
+    public Item(String name,double weight, double value) {
+        this.name = name;
         this.weight = weight;
         this.value = value;
 
@@ -20,31 +21,32 @@ public class Item implements Comparable<Item> {
         }
     }
 
+    // Constructor para pruebas
+    public Item(double weight, double value) {
+        this.weight = weight;
+        this.value = value;
+        try {
+            this.valuePerWeight = this.value / this.weight;
+        } catch (Exception e) {
+            this.valuePerWeight = -1;
+        }
+    }
+
     public Item() {
     }
 
-
-    public static boolean cmp(Item a, Item b) {
-        double r1 = (double) a.value / a.weight;
-        double r2 = (double) b.value / b.weight;
-        return r1 > r2;
-    }
-
+    // Definimos el ordenamiento natural de esta clase
+    
+    @Override
     public int compareTo(Item i) {
         return Double.compare(this.valuePerWeight, i.valuePerWeight);
     }
 
-    static class valuePerWeightComparator implements Comparator<Item> {
-
-        public int compare(Item a, Item b) {
-            return a.compareTo(b);
-        }
-    }
-
     @Override
     public String toString() {
-        return "Item{" + "weight=" + weight + ", value=" + value + ", valuePerWeight=" + valuePerWeight + '}';
+        return "Item{" + "name=" + name + ", weight=" + weight + ", value=" + value + ", valuePerWeight=" + valuePerWeight + '}';
     }
+
    
     
 }
