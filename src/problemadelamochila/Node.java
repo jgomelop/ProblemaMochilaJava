@@ -4,6 +4,8 @@
  */
 package problemadelamochila;
 
+import java.util.*;
+import java.lang.*;
 /**
  *
  * @author jpgl2
@@ -26,7 +28,7 @@ public class Node {
     // Returns bound of profit in subtree rooted with u.
     // This function mainly uses Greedy solution to find
     // an upper bound on maximum profit.
-    public static double calculateBound(Node u, int n, int W, Item arr[]) {
+    public static double calculateBound(Node u, int n, int W, List<Item> arr) {
         // if weight overcomes the knapsack capacity, return
         // 0 as expected bound
         if (u.weight >= W) {
@@ -36,7 +38,6 @@ public class Node {
         // initialize bound on profit by current profit
         double profit_bound = u.profit;
         
-        
 
         // Start including items from index 1 more to current
         // item index
@@ -45,16 +46,17 @@ public class Node {
         
         // checking index condition and knapsack capacity
         // condition
-        while( (j<n) && (total_weight + arr[j].weight <= W)){
-            total_weight += arr[j].weight;
-            profit_bound += arr[j].value;
+        while( (j<n) && (total_weight + arr.get(j).weight <= W)){
+            total_weight += arr.get(j).weight;
+            profit_bound += arr.get(j).value;
             j++;
         }
         
         // If k is not n, include last item partially for 
         // upper bound on profit
+        
         if (j < n){
-            profit_bound += (W - total_weight)* arr[j].value /arr[j].weight;
+            profit_bound += (W - total_weight)* arr.get(j).valuePerWeight;
         }
         
         return profit_bound;

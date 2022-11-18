@@ -5,9 +5,9 @@ import java.util.*;
 
 public class Item implements Comparable<Item> {
 
-    private double weight;
-    private double value;
-    private double valuePerWeight;
+    public double weight;
+    public double value;
+    public double valuePerWeight;
 
     public Item(double weight, double value) {
         this.weight = weight;
@@ -23,29 +23,6 @@ public class Item implements Comparable<Item> {
     public Item() {
     }
 
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public double getValue() {
-        return value;
-    }
-
-    public void setValue(double value) {
-        this.value = value;
-    }
-
-    public double getValuePerWeight() {
-        return valuePerWeight;
-    }
-
-    public void setValuePerWeight(double valuePerWeight) {
-        this.valuePerWeight = valuePerWeight;
-    }
 
     public static boolean cmp(Item a, Item b) {
         double r1 = (double) a.value / a.weight;
@@ -57,10 +34,17 @@ public class Item implements Comparable<Item> {
         return Double.compare(this.valuePerWeight, i.valuePerWeight);
     }
 
-    static class ColorComparator implements Comparator<Item> {
+    static class valuePerWeightComparator implements Comparator<Item> {
 
         public int compare(Item a, Item b) {
             return a.compareTo(b);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Item{" + "weight=" + weight + ", value=" + value + ", valuePerWeight=" + valuePerWeight + '}';
+    }
+   
+    
 }
