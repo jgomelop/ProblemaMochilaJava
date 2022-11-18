@@ -14,6 +14,10 @@ public class ProblemaDeLaMochila {
         // Sorting Item on basis of value per unit
         // weight
         Collections.sort(arr, Comparator.reverseOrder());
+        // Printing values to check arr sorting.
+        for (Item i : arr) {
+            System.out.println(i.toString());
+        }
         
         // Make a queue for traversing the node
         Queue<Node> Q = new LinkedList<>();
@@ -60,6 +64,7 @@ public class ProblemaDeLaMochila {
             // update maxProfit
             if (v.weight <= W && v.profit > maxProfit){
                 maxProfit = v.profit;
+                System.out.println(arr.get(v.level).value);
             }
             
             // Get the upper bound  on profit to decide
@@ -79,58 +84,34 @@ public class ProblemaDeLaMochila {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        int capacidad = 10;
-        int m = 13; // 12 elementos + 1
-
-        // Tabulación de vector de pesos
-        double peso[] = new double[m];
-        peso[0] = 0;
-        peso[1] = 0.5;
-        peso[2] = 2;
-        peso[3] = 0.3;
-        peso[4] = 1;
-        peso[5] = 1;
-        peso[6] = 1.5;
-        peso[7] = 1.8;
-        peso[8] = 3;
-        peso[9] = 0.5;
-        peso[10] = 0.3;
-        peso[11] = 1;
-        peso[12] = 2;
-
-        double beneficio[] = new double[m];
-        beneficio[0] = 0;
-        beneficio[1] = 5;
-        beneficio[2] = 12;
-        beneficio[3] = 4;
-        beneficio[4] = 6;
-        beneficio[5] = 5;
-        beneficio[6] = 6.5;
-        beneficio[7] = 8;
-        beneficio[8] = 15;
-        beneficio[9] = 5;
-        beneficio[10] = 2;
-        beneficio[11] = 4;
-        beneficio[12] = 7;
+        int W = 10; // Capacidad mochila
 
         List<Item> arr = new ArrayList<>();
         arr.add(new Item(0.5, 5));
-        arr.add(new Item(2, 13));
+        arr.add(new Item(2, 12));
         arr.add(new Item(0.3, 4));
+        arr.add(new Item(1,6));
+        arr.add(new Item(1,5));
+        arr.add(new Item(1.5,6.5));
+        arr.add(new Item(1.8,8));
+        arr.add(new Item(3,15));
+        arr.add(new Item(0.5,5));
+        arr.add(new Item(0.3,2));
+        arr.add(new Item(1,4));
+        arr.add(new Item(2,7));
         
-        // Using enhanced for loop(for-each) for iteration
+        // Recorriendo la lista para verificar elementos
         for (Item i : arr) {
             System.out.println(i.toString());
         }
         System.out.println("");
-        Collections.sort(arr, Comparator.reverseOrder());
         
-        
-        // Using enhanced for loop(for-each) for iteration
-        for (Item i : arr) {
-            System.out.println(i.toString());
-        }
-        
+        int n = arr.size();
+
+        double value = knapsack(W, arr, n);
+        System.out.printf("\nValor máximo: %f\n ",value);
+
+        // Array for testing purposes. Valor máximo es 254
         List<Item> arr2 = new ArrayList<>();
         arr2.add(new Item(2,40));
         arr2.add(new Item(3.14,50));
@@ -138,9 +119,8 @@ public class ProblemaDeLaMochila {
         arr2.add(new Item(5,95));
         arr2.add(new Item(3,30));
 
-
-        double value = knapsack(10, arr2, 5);
-        System.out.println(value);
+        //double value2 = knapsack(10, arr2, 5);
+        //System.out.println(value2);
     }
 
 }
